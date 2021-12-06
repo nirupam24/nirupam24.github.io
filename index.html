@@ -21,7 +21,7 @@
 
 <label class="logo" >NIRUPAM</label>
 <ul>
-<li><a href="index">Home</a></li>
+<li><a href="index" class="active>Home</a></li>
 <li><a href="about">About</a></li>
 <li><a href="#">Services</a></li>
 <li><a href="#">Contact</a></li>
@@ -502,13 +502,19 @@ border-radius : 3px;
 
 }
 
-active,a:hover{
-background: #1b9bff;
+a:hover{
+box-shadow: 0 1px 8px 0 #15f4ee inset, 0 1px 8px #15f4ee,
+                   0 1px 8px 0 #15f4ee inset, 0 1px 8px #15f4ee},
+:focus{background: #ffffff;
+                   color: #ffffff;
+                   
+}
+.active{background: ;
+                    color: #15f4ee;
+                     box-shadow: 0 1px 8px 0 #15f4ee inset, 0 1px 8px #15f4ee,
+                   0 1px 8px 0 #15f4ee inset, 0 1px 8px #15f4ee;
 }
 
-active,a:hover{
-background: #1b9bff;
-}
 
 
 .checkbtn{
