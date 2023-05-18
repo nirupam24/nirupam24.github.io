@@ -251,7 +251,7 @@ position: absolute;
 }
 
 .glass {
-background:var(--third-color);
+background:var(--ninth-color);
 height: 5350%;
 width: 60vw;
 
@@ -259,7 +259,7 @@ border-radius : 2rem;
 z-index: 2;
 backdrop-filter: blur(2rem);
 align-iems: flex-start;
-
+box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.1);
 border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 border-right: 1px solid rgba(255, 255, 255, 0.5);
 position: absolute;
@@ -342,7 +342,7 @@ backdrop-filter: blur(5px);
 }
 .card .content h2 {
 position: absolute;
-top: -90px;
+top: -108px;
 right: 30px;
 font-size: 8em;
 color: rgba(255, 255, 255, 0.05);
@@ -453,12 +453,16 @@ border-radius: 15px;
 
 	
 :root{
- --primary-color: #E5E5E5;
+ --primary-color: white;
  --secondary-color: #212121;
  --third-color: rgb(190, 189, 187, 0.50);
  --fourth-color: #808080;
   --fifth-color: rgba(0, 0, 0, 0.7);
  --sixth-color: #161623;
+ --seventh-color: rgba(255,255,255,0.7);
+ --eigth-color: 1px 1px 25px rgba(0, 0, 0, 0.1);
+ --ninth-color: rgba(0, 0, 0, 0.1);
+ --tenth-color: 1px 1px 5px rgba(0, 0, 0, 0.1);
  }
 .dark-theme{
  --primary-color: #161623;
@@ -467,17 +471,21 @@ border-radius: 15px;
  --fourth-color: #202020;
  --fifth-color: rgba(255, 255, 255, 0.80);
  --sixth-color: #E5E5E5;
+ --seventh-color: rgba(0,0,0,0.7);
+ --eigth-color: 10px 10px 50px rgb(255 255 255 / 40%);
+ --ninth-color: rgba(255, 255, 255, 0.1);
+ --tenth-color: 1px 1px 7px rgba(255, 255, 255, 0.9);
 }
 
 nav{
-background: var(--third-color);
+background: var(--seventh-color);
 border-radius: 15px;
 padding: 2px;
 position: relative;
 }  
 
 label.logo{
-color: var(--secondary-color);
+color: var(--eigth-color);
 
 font-size: 35px;
 }    
@@ -503,28 +511,22 @@ border-radius : 3px;
 }
 
 a:hover{
-box-shadow: 0 1px 8px 0 #15f4ee inset, 0 1px 8px #15f4ee,
-                   0 1px 8px 0 #15f4ee inset, 0 1px 8px #15f4ee},
-:focus{background: #ffffff;
-                   color: #ffffff;
+box-shadow: var(--tenth-color);
+
+}
+
                    
 }
-.active{background: ;
-                    color: #15f4ee;
-                     box-shadow: 0 1px 8px 0 #15f4ee inset, 0 1px 8px #15f4ee,
-                   0 1px 8px 0 #15f4ee inset, 0 1px 8px #15f4ee;
+.active{background: ;}
+                    
+a:active{
+font-weight: bold;
 }
-a:active{background: #ffffff;
-                    color: #15f4ee;
-                     box-shadow: 0 5px 20px 0 #15f4ee inset, 0 5px 20px #15f4ee,
-                   0 5px 20px 0 #15f4ee inset, 0 5px 20px #15f4ee;	
-
-	}
 
 .checkbtn{
 font-size: 30px;
 
-color: white;
+color: var(--secondary-color);
 float: right;
 line-height: -20px;
 margin-right: 20px;
@@ -571,7 +573,7 @@ ul{
 position: fixed;
 width: 100%;
 height: 100vh;
-background: var(--third-color);
+background: var(--seventh-color);
 top: 80px;
 left: -150%;
 text-align: center;
