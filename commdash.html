@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>CommDash: Communication Skills Game</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{--bg:#eef3f8;--card:#fff;--tx:#10243a;--mut:#4d6178;--pr:#0e7c86;--prt:#fff;--ok:#166534;--okb:#dcfce7;--bad:#9f1d1d;--badb:#fee2e2;--bd:#c9d6e3;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1826;--card:#12263a;--tx:#e8f1f8;--mut:#9fb3c8;--pr:#3cc6d2;--prt:#06202a;--ok:#86efac;--okb:#12391f;--bad:#fca5a5;--badb:#43171a;--bd:#28425c}}
+:root[data-theme="dark"]{--bg:#0b1826;--card:#12263a;--tx:#e8f1f8;--mut:#9fb3c8;--pr:#3cc6d2;--prt:#06202a;--ok:#86efac;--okb:#12391f;--bad:#fca5a5;--badb:#43171a;--bd:#28425c}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:20px 16px 40px}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.2;margin:0 0 8px}
+h1{font-size:2.2rem}h2{font-size:1.35rem}
+.wave{display:flex;gap:4px;align-items:flex-end;height:34px;margin-bottom:10px}
+.wave i{width:6px;background:var(--pr);border-radius:3px;animation:w 1.1s ease-in-out infinite;height:30%}
+.wave i:nth-child(2n){animation-delay:.2s}.wave i:nth-child(3n){animation-delay:.45s}.wave i:nth-child(5n){animation-delay:.7s}
+@keyframes w{50%{height:100%}}
+@media (prefers-reduced-motion:reduce){.wave i{animation:none;height:60%}}
+.mut{color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;margin:12px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+button{font:inherit;cursor:pointer;color:var(--tx)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--pr);outline-offset:2px}
+.mod{text-align:left;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px}
+.mod b{display:block;font-family:Georgia,serif;font-size:1.1rem}
+.go,.opt{border-radius:10px;border:1px solid var(--bd);background:var(--card);padding:12px 14px;width:100%;text-align:left;margin-top:8px}
+.go{background:var(--pr);color:var(--prt);border-color:var(--pr);font-weight:600;text-align:center}
+.opt:hover:not(:disabled){border-color:var(--pr)}
+.opt.ok{background:var(--okb);border-color:var(--ok);color:var(--ok)}
+.opt.bad{background:var(--badb);border-color:var(--bad);color:var(--bad)}
+input{font:inherit;width:100%;box-sizing:border-box;padding:12px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx)}
+.bar{height:8px;background:var(--bd);border-radius:4px;overflow:hidden}.bar div{height:100%;background:var(--pr)}
+.row{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+ol{padding-left:22px;margin:6px 0}li{padding:2px 0}
+.fb{margin-top:12px;padding:12px;border-radius:10px;background:var(--bg);border:1px solid var(--bd)}
+.link{background:none;border:0;color:var(--pr);text-decoration:underline;padding:0}
+</style></head><body><main id="app"></main>
+<script>
+var M=[
+{id:"body",t:"Body Language",d:"Posture, eye contact and facial cues",qs:[
+["An interviewer leans back with arms crossed while you explain your design. What does this most likely signal?",["Doubt or discomfort. Invite a question to re-engage","He is fully convinced","He wants to end the meeting","Nothing, body language never matters"],0,"A closed posture often signals doubt or discomfort. Pausing to ask “Any questions so far?” re-opens the conversation."],
+["What is the best eye-contact habit during a presentation?",["Read from the slides","Scan the room and hold each person for a few seconds","Look at the ceiling","Look only at the teacher"],1,"Holding eye contact for a few seconds per person builds trust and shows confidence."],
+["Which stance looks most confident when presenting?",["Slouched, hands in pockets","Upright, feet shoulder-width apart","Pacing constantly","Leaning on the podium"],1,"An upright, balanced stance projects confidence and helps your breathing and voice."],
+["Your words say “I’m confident” but your body is fidgeting and avoiding eye contact. Whom will listeners tend to believe?",["Your words","Your body language and tone","Neither","The slides"],1,"When words and non-verbal cues conflict, listeners tend to trust the non-verbal signals."],
+["Which facial expression helps build rapport in a team meeting?",["A blank stare","A frown while listening","A genuine smile and nodding","Rolling your eyes"],2,"A genuine smile and nodding show you are engaged and listening."]]},
+{id:"hands",t:"Gestures & Hands",d:"What your hands say while you speak",qs:[
+["Which is better than pointing a finger at your audience?",["Open palm toward them","Pointing harder","Hiding your hands","Clenching a fist"],0,"Finger-pointing feels aggressive. An open palm feels inviting."],
+["Where should your hand gestures mostly stay while presenting?",["Above your head","Between chest and waist, purposeful","Behind your back","Below the table"],1,"Gestures in the chest-to-waist zone look natural and are visible to everyone."],
+["Clicking a pen and shuffling papers while speaking mainly shows…",["Expertise","Nervousness and distraction","Honesty","Leadership"],1,"Fidgeting distracts listeners from your message and signals nervousness."],
+["Why must engineers be careful with gestures in international teams?",["Gestures are universal","Meanings differ across cultures","Gestures are banned at work","Only words are understood"],1,"A thumbs-up or a hand wave can mean different things in different cultures."],
+["Which gesture suggests openness and honesty?",["Arms crossed","Hands hidden behind the back","Open palms, slightly forward","Clenched fists"],2,"Open palms signal that you have nothing to hide."]]},
+{id:"voice",t:"Voice & Speech",d:"Pace, pitch, pauses and clarity",qs:[
+["A comfortable speaking pace for a technical presentation is about…",["60 words per minute","120 to 150 words per minute","220 words per minute","As fast as possible"],1,"Around 120 to 150 words per minute lets listeners follow complex ideas."],
+["When should you pause?",["Never","After a key point so it sinks in","Only when you forget","In the middle of every word"],1,"A short pause after a key point adds emphasis and gives listeners time to think."],
+["How do you fix a monotone voice?",["Speak louder only","Vary pitch and stress key words","Speak faster","Whisper"],1,"Changing pitch and stressing key words keeps listeners engaged."],
+["Speaking to a large room, you should…",["Mumble to the front row","Project your voice to the back row","Shout continuously","Face the screen"],1,"Project from your diaphragm and face the audience so the back row can hear you."],
+["What is the best replacement for filler words such as “um” and “like”?",["More fillers","A silent pause","Speaking faster","Laughing"],1,"A silent pause sounds confident. Fillers sound uncertain."]]},
+{id:"tone",t:"Tone & Pitch",d:"How your voice changes your meaning",qs:[["A rising pitch at the end of a statement usually makes you sound…",["Certain and authoritative","Unsure, like you are asking a question","Angry","Bored"],1,"Ending statements on a falling pitch sounds more certain."],["Which tone suits telling a client about a project delay?",["Casual and joking","Calm, honest and respectful","Defensive and loud","Silent and vague"],1,"A calm, honest tone keeps trust even when the news is bad."],["“I’m fine” said sharply versus warmly shows that…",["Words alone carry all the meaning","Tone can change the meaning of the same words","Tone never matters","Only volume matters"],1,"Tone carries attitude. The same words can mean very different things."],["You must stress a critical number in a safety report. You should…",["Say it faster than the rest","Slow down, raise your pitch slightly and pause after it","Whisper it","Skip it"],1,"A slower pace, a pitch lift and a pause make key points stand out."],["Which helps you sound calm when nervous?",["Slow breaths and a lower, comfortable pitch","Speaking very fast","Holding your breath","Squeaking your voice up"],0,"Nerves tighten the voice. Slow breathing relaxes it and slows your pace."]]},
+{id:"listen",t:"Listening & Teamwork",d:"Eye contact, listening and clear teamwork",qs:[["Which is an active listening habit?",["Interrupting early","Paraphrasing what the speaker said","Planning your reply only","Looking away"],1,"Paraphrasing shows you understood and lets the speaker correct you."],["A teammate explains a bug while you check your phone. What do they conclude?",["You are very interested","You are not interested in them","You are busy and helpful","Nothing"],1,"Looking at your phone signals low interest, even if you are listening."],["In a video meeting, how do you show eye contact when speaking?",["Look at the camera","Look at your own face","Look at the floor","Close your eyes"],0,"Looking at the camera feels like eye contact to the viewers."],["Your manager gives a vague instruction. The best response is…",["Guess and start","Repeat it back and ask a specific question","Say nothing","Ask a colleague to do it"],1,"Confirming the task early prevents costly rework."],["When you disagree with a teammate, you should…",["Raise your voice","Focus on the issue, stay calm and explain your reasons","Roll your eyes","Walk out"],1,"Discuss the problem, not the person, and keep a calm tone."]]},
+{id:"oral",t:"Oral Presentation",d:"Structure, slides, Q&A and audience",qs:[
+["Which structure works best for a talk?",["Body, then random facts","Introduction, body, conclusion","Only conclusion","Only questions"],1,"Tell them what you will say, say it, then recap what you said."],
+["Which slide is best?",["A full paragraph of text","One idea with a few words and a visual","Ten bullet points","Tiny font with a long table"],1,"One idea per slide. Do not read the slide aloud word for word."],
+["The best way to calm nerves before presenting is…",["Skip practice","Rehearse aloud and take slow deep breaths","Memorise every word","Avoid the audience"],1,"Rehearsal builds familiarity, and slow breathing lowers anxiety."],
+["You do not know the answer to a question in Q&A. You should…",["Make something up","Say you will check and follow up","Ignore the question","Blame the audience"],1,"Honesty protects your credibility. Follow up later with the right answer."],
+["Presenting to a non-technical audience, an engineer should…",["Use as much jargon as possible","Use analogies and focus on impact","Speak very fast","Read formulas aloud"],1,"Translate technical detail into plain language and explain what it means for them."]]}
+];
+var S={name:"",done:{},m:null,q:[],i:0,s:0,k:0},$=function(s){return document.querySelector(s)};
+function e(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function ld(k){try{return JSON.parse(localStorage.getItem(k))}catch(x){return null}}
+function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(x){}}
+function tot(){var t=0;for(var k in S.done)t+=S.done[k];return t}
+function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function hero(){return '<div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>'}
+function login(){S.name=ld("cd_name")||"";if(S.name){S.done=ld("cd_done_"+S.name)||{};return home()}
+$("#app").innerHTML=hero()+'<h1>CommDash</h1><p class="mut">Six short rounds on the communication skills every engineer needs: body language, gestures, voice, tone and pitch, listening and oral presentation.</p><div class="card"><label for="nm"><b>Your name</b></label><input id="nm" maxlength="20" autocomplete="off" placeholder="Enter a name for the leaderboard"><button class="go" onclick="join()">Start playing</button></div>'}
+function join(){var n=$("#nm").value.trim();if(!n){$("#nm").focus();return}S.name=n;S.done=ld("cd_done_"+n)||{};sv("cd_name",n);home()}
+function who(){sv("cd_name","");S.name="";login()}
+function home(){var lb=ld("cd_lb")||{},arr=Object.keys(lb).map(function(k){return[k,lb[k]]}).sort(function(a,b){return b[1]-a[1]}).slice(0,10);
+$("#app").innerHTML=hero()+'<h1>Hi, '+e(S.name)+'</h1><div class="row"><span class="mut">Total score: <b>'+tot()+'</b> of '+M.length*70+'</span><button class="link" onclick="who()">Change player</button></div><h2 style="margin-top:16px">Pick a round</h2><div class="grid">'+M.map(function(m){var d=S.done[m.id];return '<button class="mod" onclick="play(\''+m.id+'\')"><b>'+m.t+'</b><span class="mut">'+m.d+'</span><br><span>'+(d!==undefined?'Best: '+d+' of 70':'Not played yet')+'</span></button>'}).join("")+'</div><div class="card"><h2>Top players on this device</h2>'+(arr.length?'<ol>'+arr.map(function(a){return '<li>'+e(a[0])+' <b>'+a[1]+'</b></li>'}).join("")+'</ol>':'<p class="mut">No scores yet. Finish a round to appear here.</p>')+'</div>'}
+function play(id){S.m=M.find(function(m){return m.id===id});S.q=S.m.qs.map(function(q){return{q:q[0],w:q[3],o:shuf(q[1].map(function(t,i){return{t:t,c:i===q[2]}}))}});S.i=0;S.s=0;S.k=0;ask()}
+function ask(){var q=S.q[S.i];$("#app").innerHTML='<div class="row"><b>'+S.m.t+'</b><span>Score '+S.s+'</span></div><div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="'+S.i+'"><div style="width:'+S.i*20+'%"></div></div><div class="card"><p class="mut">Question '+(S.i+1)+' of 5</p><h2>'+q.q+'</h2>'+q.o.map(function(o,k){return '<button class="opt" onclick="pick('+k+')">'+o.t+'</button>'}).join("")+'<div id="fb"></div></div>'}
+function pick(k){var q=S.q[S.i],ok=q.o[k].c,p=0,b=document.querySelectorAll(".opt");
+b.forEach(function(x,j){x.disabled=true;if(q.o[j].c)x.classList.add("ok");else if(j===k)x.classList.add("bad")});
+if(ok){S.k++;p=10+Math.min(S.k-1,5)*2;S.s+=p}else S.k=0;
+$("#fb").innerHTML='<div class="fb"><b>'+(ok?'Correct, +'+p+' points'+(S.k>1?' (streak x'+S.k+')':''):'Not quite')+'</b><br>'+q.w+'</div><button class="go" id="nx" onclick="next()">'+(S.i<4?'Next question':'See result')+'</button>';$("#nx").focus()}
+function next(){S.i++;if(S.i<5)ask();else fin()}
+function fin(){var id=S.m.id,b=Math.max(S.done[id]||0,S.s);S.done[id]=b;sv("cd_done_"+S.name,S.done);var lb=ld("cd_lb")||{};lb[S.name]=Math.max(lb[S.name]||0,tot());sv("cd_lb",lb);
+var r=S.s>=56?"Confident communicator":S.s>=36?"Getting there":"Keep practising";
+$("#app").innerHTML=hero()+'<h1>'+r+'</h1><div class="card"><p>You scored <b>'+S.s+'</b> of 70 in '+S.m.t+'. Your best is <b>'+b+'</b>. Your total is <b>'+tot()+'</b> of '+M.length*70+'.</p><button class="go" onclick="play(\''+id+'\')">Play this round again</button><button class="opt" onclick="home()">Back to rounds</button></div>'}
+login();
+</script></body></html>
